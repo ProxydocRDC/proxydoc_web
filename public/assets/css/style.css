@@ -25,9 +25,11 @@ Project:  Apprista
 
 :root {
     --e-global-color-primary: #150d45;
-    --e-global-color-secondary: #fe7b53;
+    /* Orange remplacé par le rouge principal du logo */
+    --e-global-color-secondary: #e01f26;
     --e-global-color-text: #4f4975;
-    --e-global-color-accent: #50e3ae;
+    /* Accent = bleu du logo pour les survols */
+    --e-global-color-accent: #274df8;
     --e-global-color-white: #ffffff;
     --e-global-color-bright-blue: #274df8;
     --e-global-color-Moderate-violet: #6639bd;
@@ -121,7 +123,7 @@ p {
     background-color: transparent;
 }
 .navbar-nav .active > a{
-    color: var(--e-global-color-accent) !important;
+    color: var(--e-global-color-secondary) !important;
 }
 .navbar-nav .nav-item .try_free_btn{
     font-weight: 500;
@@ -134,7 +136,7 @@ p {
     transition: all 0.3s ease-in-out;
 }
 .navbar-nav .active > .try_free_btn{
-    background-color: var(--e-global-color-accent);
+    background-color: var(--e-global-color-secondary);
     color: var(--e-global-color-white) !important;
 }
 .navbar-nav .nav-item .try_free_btn:hover{
@@ -146,6 +148,11 @@ p {
     margin-right: 0;
     padding-top: 0;
     padding-bottom: 0;
+}
+.navbar-brand img{
+    width: 160px;
+    height: 34px;
+    object-fit: contain;
 }
 .navbar{
     position: relative;
@@ -427,13 +434,13 @@ p {
     padding: 19px 34px;
     border-radius: 8px;
     color: var(--e-global-color-white);
-    background-color: var(--e-global-color-accent);
+    background-color: var(--e-global-color-secondary);
     text-decoration: none;
     transition: all 0.3s ease-in-out;
     display: inline-block;
 }
 .search-section .try_free_btn:hover{
-    background-color: var(--e-global-color-secondary);
+    background-color: var(--e-global-color-accent);
 }
 .search_wrapper{
     position: relative;
@@ -667,14 +674,8 @@ p {
     transition: all 0.3s ease-in-out;
     display: inline-block;
 }
-.price-section .price_content .premium{
-    background-color: var(--e-global-color-accent);
-}
-.price-section .price_content .business{
-    background-color: var(--e-global-color-Moderate-violet);
-}
 .price-section .price_content:hover .get_started{
-    background-color: var(--e-global-color-bright-blue);
+    background-color: var(--e-global-color-accent);
 }
 .available-section{
     background-image: url("../images/available-background.jpg");
@@ -731,6 +732,11 @@ p {
 }
 .footer-section .middle-portion .footer-logo{
     margin-bottom: 38px;
+}
+.footer-section .middle-portion .footer-logo img{
+    width: 190px;
+    height: 40px;
+    object-fit: contain;
 }
 .footer-section .middle-portion .icons ul li{
     display: inline-block;
@@ -1479,13 +1485,7 @@ p {
     display: inline-block;
 }
 .pricing-section .pricing-box .get_started:hover{
-    background-color: var(--e-global-color-bright-blue);
-}
-.pricing-section .pricing-box .premium{
     background-color: var(--e-global-color-accent);
-}
-.pricing-section .pricing-box .business{
-    background-color: var(--e-global-color-Moderate-violet);
 }
 
 /* Contact Page Style */

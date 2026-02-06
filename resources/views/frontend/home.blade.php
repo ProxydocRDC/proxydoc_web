@@ -235,8 +235,8 @@
                         <img src="{{ asset('assets/images/search-icon.png') }}" alt="" class="img-fluid">
                     </figure>
                     <h2>Recherche simplifiée</h2>
-                    <p>Trouvez en quelques clics les pharmacies partenaires, les produits disponibles et les professionnels de santé à proximité.</p>
-                    <p class="p-text">Notre plateforme centralise les informations pour vous faire gagner du temps et vous orienter vers les bonnes ressources.</p>
+                    <p>Trouvez en quelques clics un médecin généraliste ou spécialiste disponible sur ProxyChat.</p>
+                    <p class="p-text">Recherchez également un produit pharmaceutique via ProxyChem, puis faites‑vous livrer rapidement grâce à nos pharmacies partenaires.</p>
                     <div class="search-button">
                         <a class="try_free_btn" href="{{ route('contact') }}">Nous contacter</a>
                     </div>
@@ -354,7 +354,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="price_heading">
                     <h4>Nos offres</h4>
-                    <h2>Choisir ProxyDoc</h2>
+                    <h2>ProxyChat, ProxyChem & ProxyFamily</h2>
                 </div>
             </div>
         </div>
@@ -370,14 +370,13 @@
                                 <img src="{{ asset('assets/images/price-basicicon.png') }}" alt="" class="img-fluid">
                             </figure>
                         </div>
-                        <h5 class="mb-0">Particuliers</h5>
-                        <span class="text1">Gratuit</span>
+                        <h5 class="mb-0">ProxyChat</h5>
+                        <span class="text1">Consultations en ligne</span>
                         <ul class="list-unstyled mb-0">
-                            <li class="text-size-18">Accès à l’application</li>
-                            <li class="text-size-18">Recherche de pharmacies</li>
-                            <li class="text-size-18">Articles santé</li>
-                            <li class="text-size-18">Support communautaire</li>
-                            <li class="for-space text-size-18">Disponible 24/7</li>
+                            <li class="text-size-18">Rendez-vous avec médecins généralistes & spécialistes</li>
+                            <li class="text-size-18">Consultations par chat, appel vocal ou vidéo</li>
+                            <li class="text-size-18">Orientation vers un établissement physique si nécessaire</li>
+                            <li class="for-space text-size-18">Historique des échanges médicalisés</li>
                         </ul>
                         <div class="price-button">
                             <a class="get_started basic" href="{{ route('contact') }}">Commencer</a>
@@ -391,14 +390,13 @@
                                 <img src="{{ asset('assets/images/price-premiumicon.png') }}" alt="" class="img-fluid">
                             </figure>
                         </div>
-                        <h5 class="mb-0">Pharmacies</h5>
-                        <span class="text1 text2">Sur mesure</span>
+                        <h5 class="mb-0">ProxyChem</h5>
+                        <span class="text1 text2">Pharmacie en ligne</span>
                         <ul class="list-unstyled mb-0">
-                            <li class="text-size-18">Gestion des produits</li>
-                            <li class="text-size-18">Visibilité sur la plateforme</li>
-                            <li class="text-size-18">Tableau de bord</li>
-                            <li class="text-size-18">Rapports mensuels</li>
-                            <li class="for-space text-size-18">Support dédié</li>
+                            <li class="text-size-18">Recherche et commande de produits pharmaceutiques</li>
+                            <li class="text-size-18">Livraison à domicile via pharmacies partenaires</li>
+                            <li class="text-size-18">Respect des règles (médicaments avec ou sans ordonnance)</li>
+                            <li class="for-space text-size-18">Suivi des commandes</li>
                         </ul>
                         <div class="price-button">
                             <a class="get_started premium" href="{{ route('contact') }}">Nous contacter</a>
@@ -412,14 +410,13 @@
                                 <img src="{{ asset('assets/images/price-businessicon.png') }}" alt="" class="img-fluid">
                             </figure>
                         </div>
-                        <h5 class="mb-0">Partenaires</h5>
-                        <span class="text1 text3">API & intégrations</span>
+                        <h5 class="mb-0">ProxyFamily</h5>
+                        <span class="text1 text3">Médecin de famille</span>
                         <ul class="list-unstyled mb-0">
-                            <li class="text-size-18">API REST</li>
-                            <li class="text-size-18">Synchronisation données</li>
-                            <li class="text-size-18">Intégration e-santé</li>
-                            <li class="text-size-18">Analytics</li>
-                            <li class="for-space text-size-18">Accompagnement technique</li>
+                            <li class="text-size-18">Consultations médicales à domicile planifiées</li>
+                            <li class="text-size-18">Suivi de long terme avec un même praticien</li>
+                            <li class="text-size-18">Prise en charge personnalisée du foyer</li>
+                            <li class="for-space text-size-18">Idéal pour familles & patients chroniques</li>
                         </ul>
                         <div class="price-button">
                             <a class="get_started business" href="{{ route('contact') }}">En savoir plus</a>

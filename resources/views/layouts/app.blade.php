@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta charset="utf-8">
     <meta name="description" content="@yield('meta_description', 'ProxyDoc est une plateforme digitale de services médicaux et pharmaceutiques.')">
-    <link rel="icon" type="image/png" href="{{ asset('assets/images/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/images/LOGO-P-1.png') }}">
     <link href="{{ asset('assets/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css">
@@ -20,7 +20,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <figure class="mb-0"><img src="{{ asset('assets/images/banner-logo.png') }}" alt="ProxyDoc" class="img-fluid"></figure>
+                <figure class="mb-0"><img src="{{ asset('assets/images/log.webp') }}" alt="ProxyDoc" class="img-fluid"></figure>
             </a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -66,7 +66,7 @@
                     <div class="icons">
                         <a href="{{ route('home') }}">
                             <figure class="footer-logo">
-                                <img src="{{ asset('assets/images/footer-logo.png') }}" alt="ProxyDoc">
+                                <img src="{{ asset('assets/images/log.webp') }}" alt="ProxyDoc">
                             </figure>
                         </a>
                         <ul class="list-unstyled mb-0">
@@ -121,7 +121,11 @@
                     <p class="mb-0 text-size-18">© {{ date('Y') }} ProxyDoc. Tous droits réservés.</p>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-12 d-md-block d-none">
-                    <p class="mb-0 term text-size-18">Mentions légales  |  Politique de confidentialité</p>
+                    <p class="mb-0 term text-size-18">
+                        <a href="{{ route('terms') }}" class="text text-decoration-none">Mentions légales</a>
+                        |
+                        <a href="{{ route('privacy') }}" class="text text-decoration-none">Politique de confidentialité</a>
+                    </p>
                 </div>
             </div>
         </div>

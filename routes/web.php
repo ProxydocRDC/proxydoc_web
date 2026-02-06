@@ -37,3 +37,11 @@ Route::get('/equipe', function () {
 Route::get('/contact', function () {
     return view('frontend.contact');
 })->name('contact');
+
+Route::get('/conditions-utilisation', function () {
+    return view('frontend.terms');
+})->name('terms');
+
+Route::get('/politique-confidentialite', function () {
+    return view('frontend.privacyPolicy');
+})->name('privacy');
