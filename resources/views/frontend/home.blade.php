@@ -184,7 +184,8 @@
                 <div class="position-relative">
                     <a class="popup-vimeo" href="{{ asset('assets/video/video.MP4') }}">
                         <figure class="mb-0 vediosession">
-                            <img class="thumb img-fluid" style="cursor: pointer" src="{{ asset('assets/images/image-videosession.png') }}" alt="">
+                            <img class="thumb img-fluid"
+                            style="cursor: pointer" src="{{ asset('assets/images/video.jpg.jpeg') }}" alt="">
                         </figure>
                     </a>
                 </div>
