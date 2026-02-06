@@ -13,7 +13,6 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                 <div class="banner_content" data-aos="fade-down">
-                    <h1>Votre santé, à portée de main.</h1>
                     <h3 class="text-white">Connecter pour une meilleure santé</h3>
                     <p class="text-white">Accédez aux pharmacies, aux professionnels de santé et aux contenus médicaux fiables, partout et à tout moment.</p>
                     <span >Disponible sur :</span>
