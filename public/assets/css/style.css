@@ -117,13 +117,18 @@ p {
     line-height: 18px;
     font-weight: 400; 
     color: var(--e-global-color-white) !important;
+    background-color: transparent;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
+    transition: border-color 0.3s ease, color 0.3s ease;
 }
 .navbar-nav .nav-item a:hover{
-    color: var(--e-global-color-accent) !important;
-    background-color: transparent;
+    color: var(--e-global-color-white) !important;
+    border-bottom-color: var(--e-global-color-secondary);
 }
 .navbar-nav .active > a{
-    color: var(--e-global-color-secondary) !important;
+    color: var(--e-global-color-white) !important;
+    border-bottom-color: var(--e-global-color-secondary);
 }
 .navbar-nav .nav-item .try_free_btn{
     font-weight: 500;
