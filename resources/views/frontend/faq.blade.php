@@ -14,7 +14,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="banner_content" data-aos="fade-up">
                     <div class="box">
-                        <span class="mb-0">Accueil</span>
+                        <a href="{{ route('home') }}" class="text text-decoration-none text-white"><span class="mb-0">Accueil</span></a>
                         <figure class="mb-0"><img src="{{ asset('assets/images/subbanner_arrow.png') }}" alt="" class="img-fluid"></figure>
                         <span class="mb-0 box_span">FAQ</span>
                     </div>
@@ -59,78 +59,43 @@
                 <div class="accordian-section-inner position-relative">
                     <div class="accordian-inner">
                         <div id="accordion1">
+                            @forelse($faqs ?? [] as $index => $faq)
                             <div class="accordion-card">
-                                <div class="card-header" id="headingOne">
-                                    <a href="#" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                        <h6>Qu’est-ce que ProxyDoc ?</h6>
+                                <div class="card-header" id="headingFaq{{ $faq->id }}">
+                                    <a href="#" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFaq{{ $faq->id }}" aria-expanded="false" aria-controls="collapseFaq{{ $faq->id }}">
+                                        <h6>{{ $faq->question }}</h6>
                                     </a>
                                 </div>
-                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
+                                <div id="collapseFaq{{ $faq->id }}" class="collapse" aria-labelledby="headingFaq{{ $faq->id }}">
                                     <div class="card-body">
-                                        <p class="pp text-left mb-0 p-0">ProxyDoc est une plateforme digitale de santé qui relie les patients aux pharmacies et aux professionnels de santé. L’application mobile et le site web permettent de trouver des pharmacies partenaires, consulter des articles santé et accéder à des services fiables.</p>
+                                        <p class="pp text-left mb-0 p-0">{!! $faq->answer !!}</p>
+                                        @if($faq->show_download_buttons && isset($appLinks))
+                                        <div class="available-imagewrapper mt-2">
+                                            <a class="image_apple d-inline-block mr-2" href="{{ $appLinks->app_store_url }}" target="_blank" rel="noopener">
+                                                <figure class="mb-0 available-apple">
+                                                    <img class="img-fluid" src="{{ asset('assets/images/bannerapple-img1.png') }}" alt="App Store" style="max-height: 44px;">
+                                                </figure>
+                                            </a>
+                                            <a class="image_google d-inline-block" href="{{ $appLinks->play_store_url }}" target="_blank" rel="noopener">
+                                                <figure class="mb-0 available-google">
+                                                    <img class="img-fluid" src="{{ asset('assets/images/bannergoogle-img2.png') }}" alt="Google Play" style="max-height: 44px;">
+                                                </figure>
+                                            </a>
+                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
+                            @empty
                             <div class="accordion-card">
-                                <div class="card-header" id="headingTwo">
-                                    <a href="#" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        <h6>L’application est-elle gratuite ?</h6>
-                                    </a>
+                                <div class="card-header">
+                                    <h6>Aucune question pour le moment</h6>
                                 </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
-                                    <div class="card-body">
-                                        <p class="pp text-left mb-0 p-0">Oui. L’application ProxyDoc est gratuite pour les particuliers sur Google Play et l’App Store.</p>
-                                    </div>
+                                <div class="card-body">
+                                    <p class="pp text-left mb-0 p-0">Les questions fréquentes seront bientôt disponibles. Contactez-nous à <a href="mailto:contact@proxydoc.org">contact@proxydoc.org</a>.</p>
                                 </div>
                             </div>
-                            <div class="accordion-card">
-                                <div class="card-header" id="headingThree">
-                                    <a href="#" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        <h6>Comment contacter ProxyDoc ?</h6>
-                                    </a>
-                                </div>
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree">
-                                    <div class="card-body">
-                                        <p class="pp text-left mb-0 p-0">Email : support@proxydoc.cd ou via le formulaire de contact sur ce site. République Démocratique du Congo.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-card">
-                                <div class="card-header" id="headingFour">
-                                    <a href="#" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                        <h6>ProxyDoc est-il disponible hors RDC ?</h6>
-                                    </a>
-                                </div>
-                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour">
-                                    <div class="card-body">
-                                        <p class="pp text-left mb-0 p-0">ProxyDoc est lancé en RDC avec une vision d’extension en Afrique. L’application peut être téléchargée depuis les stores internationaux.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-card">
-                                <div class="card-header" id="headingFive">
-                                    <a href="#" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                        <h6>Comment rejoindre en tant que pharmacie partenaire ?</h6>
-                                    </a>
-                                </div>
-                                <div id="collapseFive" class="collapse" aria-labelledby="headingFive">
-                                    <div class="card-body">
-                                        <p class="pp text-left mb-0 p-0">Contactez-nous via le formulaire ou à support@proxydoc.cd avec le sujet « Partenariat pharmacie ». Notre équipe vous présentera les modalités et l’accès au panneau d’administration.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-card">
-                                <div class="card-header" id="headingSix">
-                                    <a href="#" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                        <h6>Où télécharger l’application ?</h6>
-                                    </a>
-                                </div>
-                                <div id="collapseSix" class="collapse" aria-labelledby="headingSix">
-                                    <div class="card-body">
-                                        <p class="pp text-left mb-0 p-0">Sur Google Play Store (Android) et Apple App Store (iOS). Les liens sont disponibles sur la page d’accueil et en bas de chaque page du site.</p>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>

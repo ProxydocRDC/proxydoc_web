@@ -386,6 +386,36 @@ p {
 .offer-videosection .vediosession{
     padding-left: 2px;
 }
+.offer-videosection .video-play-link {
+    position: relative;
+    display: block;
+}
+.offer-videosection .video-play-btn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--e-global-color-white);
+    color: var(--e-global-color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    line-height: 1;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.offer-videosection .video-play-btn i {
+    margin-left: 4px;
+    color: var(--e-global-color-accent);
+}
+.offer-videosection .video-play-link:hover .video-play-btn {
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 6px 24px rgba(39, 77, 248, 0.25);
+}
 .offer_content{
     text-align: center;
 }
@@ -739,8 +769,8 @@ p {
     margin-bottom: 38px;
 }
 .footer-section .middle-portion .footer-logo img{
-    width: 190px;
-    height: 40px;
+    width: 200px;
+    height: 50px;
     object-fit: contain;
 }
 .footer-section .middle-portion .icons ul li{
@@ -1189,6 +1219,7 @@ p {
     right: 0;
     margin: 0 auto;
 }
+#carouselReviews .carousel-control-prev,
 #carouselExampleControls .carousel-control-prev{
     left: -75px;
     top: 125px;
@@ -1197,6 +1228,7 @@ p {
     color: var(--e-global-color-primary);
     opacity: 1;
 }
+#carouselReviews .carousel-control-next,
 #carouselExampleControls .carousel-control-next{
     right: -75px;
     top: 125px;
@@ -1204,6 +1236,22 @@ p {
     line-height: 24px;
     color: var(--e-global-color-primary);
     opacity: 1;
+}
+.review-section .review_source,
+.review-section .review-source {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--e-global-color-accent);
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+}
+.review-section .review-stars li i.filled,
+.review-section .review_content .content-box ul li i {
+    color: #ffd800;
+}
+.review-section .review-stars li i:not(.filled) {
+    color: #e0e0e0;
 }
 /* FAQ Page Style */
 

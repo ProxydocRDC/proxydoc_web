@@ -6,6 +6,18 @@
                     <h2 class="text-white">L’app disponible sur tous les appareils</h2>
                     <p class="text-white">Téléchargez ProxyDoc sur votre smartphone ou tablette et accédez aux services de santé où que vous soyez.</p>
                     <div class="available-imagewrapper">
+                        @if(isset($appLinks))
+                        <a class="image_apple" href="{{ $appLinks->app_store_url }}" data-track-action="app_store" data-track-context="available_section" target="_blank" rel="noopener">
+                            <figure class="mb-0 available-apple">
+                                <img class="img-fluid" src="{{ asset('assets/images/bannerapple-img1.png') }}" alt="App Store">
+                            </figure>
+                        </a>
+                        <a class="image_google" href="{{ $appLinks->play_store_url }}" data-track-action="play_store" data-track-context="available_section" target="_blank" rel="noopener">
+                            <figure class="mb-0 available-google">
+                                <img class="img-fluid" src="{{ asset('assets/images/bannergoogle-img2.png') }}" alt="Google Play">
+                            </figure>
+                        </a>
+                        @else
                         <a class="image_apple" href="https://apps.apple.com/cd/app/proxydoc/id6752807730?l=fr-FR" target="_blank" rel="noopener">
                             <figure class="mb-0 available-apple">
                                 <img class="img-fluid" src="{{ asset('assets/images/bannerapple-img1.png') }}" alt="App Store">
@@ -16,6 +28,7 @@
                                 <img class="img-fluid" src="{{ asset('assets/images/bannergoogle-img2.png') }}" alt="Google Play">
                             </figure>
                         </a>
+                        @endif
                     </div>
                 </div>
             </div>

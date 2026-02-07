@@ -17,16 +17,16 @@
                     <p class="text-white">Accédez aux pharmacies, aux professionnels de santé et aux contenus médicaux fiables, partout et à tout moment.</p>
                     <span >Disponible sur :</span>
                     <div class="image_wrapper">
-                        <a href="https://apps.apple.com/cd/app/proxydoc/id6752807730?l=fr-FR" target="_blank" rel="noopener">
+                        <a href="{{ $appLinks->app_store_url ?? 'https://apps.apple.com/cd/app/proxydoc/id6752807730?l=fr-FR' }}" target="_blank" rel="noopener">
                             <figure class="mb-0 image_apple">
                                 <img class="img-fluid" src="{{ asset('assets/images/bannerapple-img1.png') }}" alt="App Store">
                             </figure>
                         </a>
-                        <a class="image_google" href="https://play.google.com/store/apps/details?id=org.proxydoc.mobileapp" target="_blank" rel="noopener">
-                            <figure class="mb-0 image_google">
-                                <img class="img-fluid" src="{{ asset('assets/images/bannergoogle-img2.png') }}" alt="Google Play">
-                            </figure>
-                        </a>
+<a class="image_google" href="{{ $appLinks->play_store_url ?? 'https://play.google.com/store/apps/details?id=org.proxydoc.mobileapp' }}" target="_blank" rel="noopener">
+                                <figure class="mb-0 image_google">
+                                    <img class="img-fluid" src="{{ asset('assets/images/bannergoogle-img2.png') }}" alt="Google Play">
+                                </figure>
+                            </a>
                     </div>
                 </div>
             </div>
@@ -70,11 +70,15 @@
     <div class="container">
         <div class="partner_box" data-aos="fade-up">
             <ul class="mb-0 list-unstyled">
+                @forelse($partners ?? [] as $index => $partner)
+                <li><figure class="mb-0 partner1 {{ $index > 0 ? 'partner' . ($index + 1) : '' }}"><img class="img-fluid" src="{{ asset($partner->logo) }}" alt="{{ $partner->name }}"></figure></li>
+                @empty
                 <li><figure class="mb-0 partner1"><img class="img-fluid" src="{{ asset('assets/images/partner1.png') }}" alt=""></figure></li>
                 <li><figure class="mb-0 partner1 partner2"><img class="img-fluid" src="{{ asset('assets/images/partner2.png') }}" alt=""></figure></li>
                 <li><figure class="mb-0 partner1 partner3"><img class="img-fluid" src="{{ asset('assets/images/partner3.png') }}" alt=""></figure></li>
                 <li><figure class="mb-0 partner1 partner4"><img class="img-fluid" src="{{ asset('assets/images/partner4.png') }}" alt=""></figure></li>
                 <li><figure class="mb-0 partner1 partner5"><img class="img-fluid" src="{{ asset('assets/images/partner5.png') }}" alt=""></figure></li>
+                @endforelse
             </ul>
         </div>
     </div>
@@ -182,11 +186,12 @@
         <div class="row position-relative">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="position-relative">
-                    <a class="popup-vimeo" href="{{ asset('assets/video/video.MP4') }}">
+                    <a class="popup-vimeo video-play-link" href="{{ asset('assets/video/video.MP4') }}">
                         <figure class="mb-0 vediosession">
                             <img class="thumb img-fluid"
                             style="cursor: pointer" src="{{ asset('assets/images/video.jpg.jpeg') }}" alt="">
                         </figure>
+                        <span class="video-play-btn" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
                     </a>
                 </div>
             </div>
@@ -209,12 +214,12 @@
                     <h2 class="text-white">Une plateforme dédiée à votre santé</h2>
                     <p class="text-white">ProxyDoc réunit plusieurs services clés : <strong>ProxyChat</strong> pour les consultations médicales en ligne, <strong>ProxyChem</strong> pour la pharmacie en ligne et <strong>ProxyFamily</strong> pour le suivi par un médecin de famille. L’application mobile est disponible sur Android et iOS afin d’améliorer concrètement l’accès aux soins.</p>
                     <div class="offer-imagewrapper">
-                        <a class="image_apple" href="https://apps.apple.com/cd/app/proxydoc/id6752807730?l=fr-FR" target="_blank" rel="noopener">
+                        <a class="image_apple" href="{{ $appLinks->app_store_url ?? 'https://apps.apple.com/cd/app/proxydoc/id6752807730?l=fr-FR' }}" target="_blank" rel="noopener">
                             <figure class="mb-0 offer-apple">
                                 <img class="img-fluid" src="{{ asset('assets/images/bannerapple-img1.png') }}" alt="">
                             </figure>
                         </a>
-                        <a class="image_google" href="https://play.google.com/store/apps/details?id=org.proxydoc.mobileapp" target="_blank" rel="noopener">
+                        <a class="image_google" href="{{ $appLinks->play_store_url ?? 'https://play.google.com/store/apps/details?id=org.proxydoc.mobileapp' }}" target="_blank" rel="noopener">
                             <figure class="mb-0 offer-google">
                                 <img class="img-fluid" src="{{ asset('assets/images/bannergoogle-img2.png') }}" alt="">
                             </figure>
@@ -238,7 +243,7 @@
                     <p>Trouvez en quelques clics un médecin généraliste ou spécialiste disponible sur ProxyChat.</p>
                     <p class="p-text">Recherchez également un produit pharmaceutique via ProxyChem, puis faites‑vous livrer rapidement grâce à nos pharmacies partenaires.</p>
                     <div class="search-button">
-                        <a class="try_free_btn" href="{{ route('contact') }}">Nous contacter</a>
+                        <a class="try_free_btn" href="{{ route('contact') }}" data-track-action="contact_cta" data-track-context="hero">Nous contacter</a>
                     </div>
                 </div>
             </div>
@@ -287,7 +292,7 @@
                         <p>Suivez vos rendez-vous, consultez les pharmacies à proximité et accédez aux articles de prévention et d’information santé.</p>
                         <p class="p-text">ProxyDoc s’engage à mettre à disposition des outils simples et fiables pour une meilleure prise en charge.</p>
                         <div class="manage-button">
-                            <a class="try_free_btn" href="{{ route('contact') }}">Nous contacter</a>
+                            <a class="try_free_btn" href="{{ route('contact') }}" data-track-action="contact_cta" data-track-context="manage_section">Nous contacter</a>
                         </div>
                     </div>
                 </div>
@@ -379,7 +384,7 @@
                             <li class="for-space text-size-18">Historique des échanges médicalisés</li>
                         </ul>
                         <div class="price-button">
-                            <a class="get_started basic" href="{{ route('contact') }}">Commencer</a>
+                            <a class="get_started basic" href="{{ route('contact') }}" data-track-action="contact_cta" data-track-context="pricing">Commencer</a>
                         </div>
                     </div>
                 </div>
@@ -399,7 +404,7 @@
                             <li class="for-space text-size-18">Suivi des commandes</li>
                         </ul>
                         <div class="price-button">
-                            <a class="get_started premium" href="{{ route('contact') }}">Nous contacter</a>
+                            <a class="get_started premium" href="{{ route('contact') }}" data-track-action="contact_cta" data-track-context="pricing">Nous contacter</a>
                         </div>
                     </div>
                 </div>
@@ -419,7 +424,7 @@
                             <li class="for-space text-size-18">Idéal pour familles & patients chroniques</li>
                         </ul>
                         <div class="price-button">
-                            <a class="get_started business" href="{{ route('contact') }}">En savoir plus</a>
+                            <a class="get_started business" href="{{ route('contact') }}" data-track-action="contact_cta" data-track-context="pricing">En savoir plus</a>
                         </div>
                     </div>
                 </div>
@@ -476,7 +481,7 @@
                                 </div>
                                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree">
                                     <div class="card-body">
-                                        <p class="pp text-left mb-0 p-0">Vous pouvez nous joindre par email à support@proxydoc.cd ou via le formulaire de contact sur ce site. Notre équipe est basée en République Démocratique du Congo et répond aux demandes dans les meilleurs délais.</p>
+                                        <p class="pp text-left mb-0 p-0">Vous pouvez nous joindre par email à <a href="mailto:contact@proxydoc.org">contact@proxydoc.org</a> ou par téléphone au <a href="tel:+243823235255">+243 823 235 255</a>, ou via le formulaire de contact sur ce site. Notre équipe est basée en République Démocratique du Congo et répond aux demandes dans les meilleurs délais.</p>
                                     </div>
                                 </div>
                             </div>
@@ -512,12 +517,12 @@
                     <h2 class="text-white">L’app disponible sur tous les appareils</h2>
                     <p class="text-white">Téléchargez ProxyDoc sur votre smartphone ou tablette et accédez aux services de santé où que vous soyez.</p>
                     <div class="available-imagewrapper">
-                        <a class="image_apple" href="https://apps.apple.com/cd/app/proxydoc/id6752807730?l=fr-FR" target="_blank" rel="noopener">
+                        <a class="image_apple" href="{{ $appLinks->app_store_url ?? 'https://apps.apple.com/cd/app/proxydoc/id6752807730?l=fr-FR' }}" target="_blank" rel="noopener">
                             <figure class="mb-0 available-apple">
                                 <img class="img-fluid" src="{{ asset('assets/images/bannerapple-img1.png') }}" alt="App Store">
                             </figure>
                         </a>
-                        <a class="image_google" href="https://play.google.com/store/apps/details?id=org.proxydoc.mobileapp" target="_blank" rel="noopener">
+                        <a class="image_google" href="{{ $appLinks->play_store_url ?? 'https://play.google.com/store/apps/details?id=org.proxydoc.mobileapp' }}" target="_blank" rel="noopener">
                             <figure class="mb-0 available-google">
                                 <img class="img-fluid" src="{{ asset('assets/images/bannergoogle-img2.png') }}" alt="Google Play">
                             </figure>

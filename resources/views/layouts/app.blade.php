@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'ProxyDoc – Plateforme digitale de santé')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta charset="utf-8">
@@ -78,7 +79,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-lg-block d-none">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-12 d-lg-block d-none">
                     <div class="services">
                         <h3 class="heading">Services ProxyDoc</h3>
                         <ul class="list-unstyled mb-0">
@@ -90,9 +91,9 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12 d-sm-block">
+                <div class="col-lg-2 col-md-2 col-sm-6 col-12 d-sm-block">
                     <div class="links">
-                        <h3 class="heading">Liens utiles</h3>
+                        <h3 class="heading">Raccourcis</h3>
                         <ul class="list-unstyled mb-0">
                             <li><a href="{{ route('home') }}" class="text text-decoration-none">Accueil</a></li>
                             <li><a href="{{ route('about') }}" class="text text-decoration-none">À propos</a></li>
@@ -102,14 +103,14 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12 d-md-block d-none">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-md-block d-none">
                     <div class="aboutus">
                         <h3 class="heading">ProxyDoc</h3>
                         <p class="text-size-18 mb-2">Connecter pour une meilleure santé.</p>
                         <ul class="list-unstyled mb-0">
                             <li><a href="{{ route('home') }}#get-app" class="text text-decoration-none">Télécharger l'app</a></li>
-                            <li><a href="https://apps.apple.com/cd/app/proxydoc/id6752807730?l=fr-FR" target="_blank" rel="noopener" class="text text-decoration-none">App iOS</a></li>
-                            <li><a href="https://play.google.com/store/apps/details?id=org.proxydoc.mobileapp" target="_blank" rel="noopener" class="text text-decoration-none">App Android</a></li>
+                            <li><a href="{{ $appLinks->app_store_url ?? 'https://apps.apple.com/cd/app/proxydoc/id6752807730?l=fr-FR' }}" target="_blank" rel="noopener" class="text text-decoration-none" data-track-action="app_store" data-track-context="footer">App iOS</a></li>
+                            <li><a href="{{ $appLinks->play_store_url ?? 'https://play.google.com/store/apps/details?id=org.proxydoc.mobileapp' }}" target="_blank" rel="noopener" class="text text-decoration-none" data-track-action="play_store" data-track-context="footer">App Android</a></li>
                         </ul>
                     </div>
                 </div>
@@ -122,7 +123,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-12 d-md-block d-none">
                     <p class="mb-0 term text-size-18">
-                        <a href="{{ route('terms') }}" class="text text-decoration-none">Mentions légales</a>
+                        <a href="{{ route('terms') }}" class="text text-decoration-none">Conditions d'utilisation</a>
                         |
                         <a href="{{ route('privacy') }}" class="text text-decoration-none">Politique de confidentialité</a>
                     </p>
@@ -140,6 +141,21 @@
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 <script src="{{ asset('assets/js/animation_links.js') }}"></script>
 <script src="{{ asset('assets/js/animation.js') }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.addEventListener('click', function(e) {
+        var el = e.target.closest('[data-track-action]');
+        if (!el) return;
+        var action = el.getAttribute('data-track-action');
+        var context = el.getAttribute('data-track-context') || '';
+        var formData = new FormData();
+        formData.append('_token', document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '');
+        formData.append('action', action);
+        formData.append('context', context);
+        fetch('{{ route("track.action") }}', { method: 'POST', body: formData, headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' } }).catch(function(){});
+    });
+});
+</script>
 @stack('scripts')
 </body>
 </html>

@@ -14,7 +14,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="banner_content" data-aos="fade-up">
                     <div class="box">
-                        <span class="mb-0">Accueil</span>
+                        <a href="{{ route('home') }}" class="text text-decoration-none text-white"><span class="mb-0">Accueil</span></a>
                         <figure class="mb-0"><img src="{{ asset('assets/images/subbanner_arrow.png') }}" alt="" class="img-fluid"></figure>
                         <span class="mb-0 box_span">À propos</span>
                     </div>
@@ -81,12 +81,12 @@
                     <h2>Qui sommes-nous ?</h2>
                     <p>ProxyDoc est une plateforme digitale de santé qui vise à faciliter l’accès aux pharmacies, aux produits de santé et aux contenus médicaux. Le site web présente l’entreprise, son équipe, ses services et oriente les utilisateurs vers l’application mobile disponible sur Android et iOS.</p>
                     <div class="count-imagewrapper">
-                        <a class="image_apple" href="https://apps.apple.com/cd/app/proxydoc/id6752807730?l=fr-FR" target="_blank" rel="noopener">
+                        <a class="image_apple" href="{{ $appLinks->app_store_url ?? 'https://apps.apple.com/cd/app/proxydoc/id6752807730?l=fr-FR' }}" target="_blank" rel="noopener">
                             <figure class="mb-0 offer-apple">
                                 <img class="img-fluid" src="{{ asset('assets/images/bannerapple-img1.png') }}" alt="App Store">
                             </figure>
                         </a>
-                        <a class="image_google" href="https://play.google.com/store/apps/details?id=org.proxydoc.mobileapp" target="_blank" rel="noopener">
+                        <a class="image_google" href="{{ $appLinks->play_store_url ?? 'https://play.google.com/store/apps/details?id=org.proxydoc.mobileapp' }}" target="_blank" rel="noopener">
                             <figure class="mb-0 offer-google">
                                 <img class="img-fluid" src="{{ asset('assets/images/bannergoogle-img2.png') }}" alt="Google Play">
                             </figure>
@@ -139,58 +139,55 @@
                     </div>
                 </div>
             </div>
+            @php $teamList = $teams ?? collect(); $firstRow = $teamList->take(3); $secondRow = $teamList->slice(3); @endphp
+            @if($firstRow->isNotEmpty())
             <div class="row" data-aos="fade-up">
+                @foreach($firstRow as $member)
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="team-box">
                         <div class="upper-part">
                             <figure class="mb-0">
-                                <img src="{{ asset('assets/images/team-image1.png') }}" alt="" class="img-fluid">
+                                <img src="{{ asset($member->image) }}" alt="{{ $member->name }}" class="img-fluid">
                             </figure>
                         </div>
                         <div class="lower-part">
-                            <h3>Fondateur</h3>
-                            <p>Direction &amp; stratégie</p>
+                            <h3>{{ $member->name }}</h3>
+                            <p>{{ $member->role ?? '' }}</p>
                             <ul class="list-unstyled mb-0">
-                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                @if($member->facebook_url)<li><a href="{{ $member->facebook_url }}" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>@endif
+                                @if($member->twitter_url)<li><a href="{{ $member->twitter_url }}" target="_blank" rel="noopener"><i class="fa-brands fa-twitter"></i></a></li>@endif
+                                @if($member->linkedin_url)<li><a href="{{ $member->linkedin_url }}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>@endif
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
-                    <div class="team-box">
-                        <div class="upper-part">
-                            <figure class="mb-0">
-                                <img src="{{ asset('assets/images/team-image2.png') }}" alt="" class="img-fluid">
-                            </figure>
-                        </div>
-                        <div class="lower-part">
-                            <h3>Équipe technique</h3>
-                            <p>Développement &amp; produit</p>
-                            <ul class="list-unstyled mb-0">
-                                <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
-                    <div class="team-box">
-                        <div class="upper-part">
-                            <figure class="mb-0">
-                                <img src="{{ asset('assets/images/team-image3.png') }}" alt="" class="img-fluid">
-                            </figure>
-                        </div>
-                        <div class="lower-part">
-                            <h3>Conseil médical</h3>
-                            <p>Santé &amp; conformité</p>
-                            <ul class="list-unstyled mb-0">
-                                <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
+            @endif
+            @if($secondRow->isNotEmpty())
+            <div class="row justify-content-center" data-aos="fade-up">
+                @foreach($secondRow as $member)
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="team-box">
+                        <div class="upper-part">
+                            <figure class="mb-0">
+                                <img src="{{ asset($member->image) }}" alt="{{ $member->name }}" class="img-fluid">
+                            </figure>
+                        </div>
+                        <div class="lower-part">
+                            <h3>{{ $member->name }}</h3>
+                            <p>{{ $member->role ?? '' }}</p>
+                            <ul class="list-unstyled mb-0">
+                                @if($member->facebook_url)<li><a href="{{ $member->facebook_url }}" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>@endif
+                                @if($member->twitter_url)<li><a href="{{ $member->twitter_url }}" target="_blank" rel="noopener"><i class="fa-brands fa-twitter"></i></a></li>@endif
+                                @if($member->linkedin_url)<li><a href="{{ $member->linkedin_url }}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>@endif
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @endif
         </div>
     </div>
 </section>
@@ -199,21 +196,20 @@
     <div class="container">
         <div class="row position-relative">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div id="carouselReviews" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
+                        @forelse($reviews ?? [] as $index => $review)
+                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                             <div class="review_content">
                                 <h2>Avis utilisateurs</h2>
                                 <div class="content-box" data-aos="fade-up">
-                                    <p>« ProxyDoc m’a permis de trouver rapidement une pharmacie ouverte près de chez moi. L’application est simple et les informations sont à jour. »</p>
-                                    <h6>Utilisateur ProxyDoc</h6>
-                                    <span>Patient</span>
-                                    <ul class="list-unstyled mb-0">
-                                        <li><a href=""><i class="fa-solid fa-star"></i></a></li>
-                                        <li><a href=""><i class="fa-solid fa-star"></i></a></li>
-                                        <li><a href=""><i class="fa-solid fa-star"></i></a></li>
-                                        <li><a href=""><i class="fa-solid fa-star"></i></a></li>
-                                        <li><a href=""><i class="fa-solid fa-star"></i></a></li>
+                                    <p>« {{ $review['text'] }} »</p>
+                                    <h6>{{ $review['author'] }}</h6>
+                                    <span class="review-source">{{ $review['source'] }}</span>
+                                    <ul class="list-unstyled mb-0 review-stars">
+                                        @for($i = 1; $i <= 5; $i++)
+                                        <li><span><i class="fa-solid fa-star {{ $i <= ($review['rating'] ?? 5) ? 'filled' : '' }}"></i></span></li>
+                                        @endfor
                                     </ul>
                                     <div class="circle">
                                         <figure class="review-circlecoma">
@@ -223,15 +219,41 @@
                                 </div>
                             </div>
                         </div>
+                        @empty
+                        <div class="carousel-item active">
+                            <div class="review_content">
+                                <h2>Avis utilisateurs</h2>
+                                <div class="content-box" data-aos="fade-up">
+                                    <p>« ProxyDoc m’a permis de trouver rapidement une pharmacie ouverte près de chez moi. L’application est simple et les informations sont à jour. »</p>
+                                    <h6>Utilisateur ProxyDoc</h6>
+                                    <span class="review-source">App Store</span>
+                                    <ul class="list-unstyled mb-0 review-stars">
+                                        <li><span><i class="fa-solid fa-star filled"></i></span></li>
+                                        <li><span><i class="fa-solid fa-star filled"></i></span></li>
+                                        <li><span><i class="fa-solid fa-star filled"></i></span></li>
+                                        <li><span><i class="fa-solid fa-star filled"></i></span></li>
+                                        <li><span><i class="fa-solid fa-star filled"></i></span></li>
+                                    </ul>
+                                    <div class="circle">
+                                        <figure class="review-circlecoma">
+                                            <img src="{{ asset('assets/images/review-circlecoma.png') }}" alt="" class="img-fluid">
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforelse
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    @if(count($reviews ?? []) > 1)
+                    <a class="carousel-control-prev" href="#carouselReviews" role="button" data-slide="prev">
                         <i class="fa-solid fa-arrow-left"></i>
                         <span class="sr-only">Précédent</span>
                     </a>
-                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#carouselReviews" role="button" data-slide="next">
                         <i class="fa-solid fa-arrow-right"></i>
                         <span class="sr-only">Suivant</span>
                     </a>
+                    @endif
                 </div>
             </div>
             <figure class="mb-0 review-sidecircle">

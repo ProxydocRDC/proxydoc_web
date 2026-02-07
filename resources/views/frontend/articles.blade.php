@@ -14,7 +14,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="banner_content" data-aos="fade-up">
                     <div class="box">
-                        <span class="mb-0">Accueil</span>
+                        <a href="{{ route('home') }}" class="text text-decoration-none text-white"><span class="mb-0">Accueil</span></a>
                         <figure class="mb-0"><img src="{{ asset('assets/images/subbanner_arrow.png') }}" alt="" class="img-fluid"></figure>
                         <span class="mb-0 box_span">Articles</span>
                     </div>

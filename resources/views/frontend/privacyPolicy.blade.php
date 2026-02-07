@@ -64,7 +64,7 @@
   <section id="qui">
     <h2>1. Responsable du traitement</h2>
     <p><strong>ProxyDoc</strong> – <strong>TODO : PROXYDOC SARL</strong>, <strong>TODO RC/NIF</strong> – siège : <strong>TODO adresse, Kinshasa (RDC)</strong>.</p>
-    <p>E-mail : <a href="mailto:support@proxydoc.org">support@proxydoc.org</a> — Délégué à la protection des données : <a href="mailto:dpo@proxydoc.org">dpo@proxydoc.org</a></p>
+    <p>E-mail : <a href="mailto:contact@proxydoc.org">contact@proxydoc.org</a> — Délégué à la protection des données : <a href="mailto:dpo@proxydoc.org">dpo@proxydoc.org</a></p>
   </section>
 
   <section id="donnees">
@@ -136,13 +136,13 @@
   <section id="droits">
     <h2>10. Vos droits</h2>
     <p>Selon la loi applicable (par ex. RDC et, si pertinent, RGPD), vous pouvez exercer vos droits d’accès, rectification, effacement, limitation, opposition, portabilité, et retrait du consentement. Pour les données de santé, des règles spécifiques s’appliquent.</p>
-    <p>Pour exercer vos droits : <a href="mailto:support@proxydoc.cd">support@proxydoc.cd</a>. Nous pouvons vérifier votre identité avant de répondre.</p>
+    <p>Pour exercer vos droits : <a href="mailto:contact@proxydoc.org">contact@proxydoc.org</a>. Nous pouvons vérifier votre identité avant de répondre.</p>
   </section>
 
   <section id="contact">
     <h2>11. Contact & réclamations</h2>
-    <p>Questions sur la confidentialité : <a href="mailto:support@proxydoc.cd">support@proxydoc.cd</a>.
-    Support général : <a href="mailto:support@proxydoc.cd">support@proxydoc.cd</a>.</p>
+    <p>Questions sur la confidentialité : <a href="mailto:contact@proxydoc.org">contact@proxydoc.org</a>.
+    Contact général : <a href="mailto:contact@proxydoc.org">contact@proxydoc.org</a>.</p>
     <p class="muted">Vous pouvez, le cas échéant, introduire une réclamation auprès de l’autorité compétente de protection des données.</p>
     <p class="muted"><a href="{{ route('terms') }}">Conditions d’utilisation</a></p>
   </section>
