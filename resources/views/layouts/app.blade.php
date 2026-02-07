@@ -142,19 +142,30 @@
 <script src="{{ asset('assets/js/animation_links.js') }}"></script>
 <script src="{{ asset('assets/js/animation.js') }}"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+(function() {
+    var trackUrl = '{{ route("track.action") }}';
+    var csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+    function sendTrack(action, context) {
+        var payload = '_token=' + encodeURIComponent(csrfToken) + '&action=' + encodeURIComponent(action) + '&context=' + encodeURIComponent(context || '');
+        if (navigator.sendBeacon) {
+            navigator.sendBeacon(trackUrl, new Blob([payload], { type: 'application/x-www-form-urlencoded' }));
+        } else {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', trackUrl, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.setRequestHeader('Accept', 'application/json');
+            xhr.send(payload);
+        }
+    }
     document.body.addEventListener('click', function(e) {
         var el = e.target.closest('[data-track-action]');
         if (!el) return;
         var action = el.getAttribute('data-track-action');
         var context = el.getAttribute('data-track-context') || '';
-        var formData = new FormData();
-        formData.append('_token', document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '');
-        formData.append('action', action);
-        formData.append('context', context);
-        fetch('{{ route("track.action") }}', { method: 'POST', body: formData, headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' } }).catch(function(){});
+        sendTrack(action, context);
     });
-});
+})();
 </script>
 @stack('scripts')
 </body>

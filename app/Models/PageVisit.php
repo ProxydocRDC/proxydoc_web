@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PageVisit extends Model
 {
-    protected $fillable = ['path', 'session_id', 'ip_hash'];
+    protected $fillable = ['path', 'session_id', 'ip_hash', 'ip', 'country'];
 
     protected $table = 'page_visits';
 }
