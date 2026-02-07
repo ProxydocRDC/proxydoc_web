@@ -28,8 +28,12 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandLogo(fn () => asset('assets/images/log.webp'))
+            ->brandLogoHeight('2rem')
+            ->favicon(fn () => asset('assets/images/LOGO-P-1.png'))
+            ->brandName('ProxyDoc')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::hex('#274df8'),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

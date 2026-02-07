@@ -5,8 +5,9 @@ namespace App\Services;
 use App\Models\ActionClick;
 use App\Models\PageVisit;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Schema;
 
 class TrackingService
 {
@@ -22,15 +23,19 @@ class TrackingService
         $sessionId = $request->session()->getId();
         $ip = $request->ip();
         $ipHash = $ip ? hash('sha256', $ip . config('app.key')) : null;
-        $country = self::getCountryFromIp($ip);
+        $data = [
+            'path' => '/' . $path,
+            'session_id' => $sessionId,
+            'ip_hash' => $ipHash,
+        ];
+        if (Schema::hasColumn('page_visits', 'ip')) {
+            $data['ip'] = $ip;
+        }
+        if (Schema::hasColumn('page_visits', 'country')) {
+            $data['country'] = self::getCountryFromIp($ip);
+        }
         try {
-            PageVisit::create([
-                'path' => '/' . $path,
-                'session_id' => $sessionId,
-                'ip_hash' => $ipHash,
-                'ip' => $ip,
-                'country' => $country,
-            ]);
+            PageVisit::create($data);
         } catch (\Throwable $e) {
             report($e);
         }
@@ -118,22 +123,33 @@ class TrackingService
 
     /**
      * Liste des visiteurs uniques : par session_id, avec pays, IP, temps passé (en secondes), nombre de pages vues.
+     * Compatible avec ou sans colonnes ip/country (si la migration n'a pas encore été exécutée en production).
      */
     public static function visitorsList(): \Illuminate\Support\Collection
     {
+        $hasIp = Schema::hasColumn('page_visits', 'ip');
+        $hasCountry = Schema::hasColumn('page_visits', 'country');
+
+        $select = 'session_id, min(created_at) as first_visit, max(created_at) as last_visit, count(*) as page_views';
+        if ($hasIp) {
+            $select .= ', max(ip) as ip';
+        }
+        if ($hasCountry) {
+            $select .= ', max(country) as country';
+        }
+
         return PageVisit::query()
-            ->selectRaw('
-                session_id,
-                max(ip) as ip,
-                max(country) as country,
-                min(created_at) as first_visit,
-                max(created_at) as last_visit,
-                count(*) as page_views
-            ')
+            ->selectRaw($select)
             ->groupBy('session_id')
             ->orderByDesc('last_visit')
             ->get()
-            ->map(function ($row) {
+            ->map(function ($row) use ($hasIp, $hasCountry) {
+                if (! $hasIp) {
+                    $row->ip = null;
+                }
+                if (! $hasCountry) {
+                    $row->country = null;
+                }
                 $first = \Carbon\Carbon::parse($row->first_visit);
                 $last = \Carbon\Carbon::parse($row->last_visit);
                 $row->time_spent_seconds = $last->diffInSeconds($first);
