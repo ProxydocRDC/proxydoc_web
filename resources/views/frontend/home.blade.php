@@ -71,13 +71,15 @@
         <div class="partner_box" data-aos="fade-up">
             <ul class="mb-0 list-unstyled">
                 @forelse($partners ?? [] as $index => $partner)
-                <li><figure class="mb-0 partner1 {{ $index > 0 ? 'partner' . ($index + 1) : '' }}"><img class="img-fluid" src="{{ asset($partner->logo) }}" alt="{{ $partner->name }}"></figure></li>
+                    <li>
+                        <figure class="mb-0 partner1 {{ $index > 0 ? 'partner' . ($index + 1) : '' }}">
+                            <img class="img-fluid" src="{{ asset($partner->logo) }}" alt="{{ $partner->name }}">
+                        </figure>
+                    </li>
                 @empty
-                <li><figure class="mb-0 partner1"><img class="img-fluid" src="{{ asset('assets/images/partner1.png') }}" alt=""></figure></li>
-                <li><figure class="mb-0 partner1 partner2"><img class="img-fluid" src="{{ asset('assets/images/partner2.png') }}" alt=""></figure></li>
-                <li><figure class="mb-0 partner1 partner3"><img class="img-fluid" src="{{ asset('assets/images/partner3.png') }}" alt=""></figure></li>
-                <li><figure class="mb-0 partner1 partner4"><img class="img-fluid" src="{{ asset('assets/images/partner4.png') }}" alt=""></figure></li>
-                <li><figure class="mb-0 partner1 partner5"><img class="img-fluid" src="{{ asset('assets/images/partner5.png') }}" alt=""></figure></li>
+                    <li class="text-center w-100">
+                        <span class="fw-bold">Espace reservé aux partenaire PROXYDOC</span>
+                    </li>
                 @endforelse
             </ul>
         </div>
