@@ -33,6 +33,7 @@ Route::get('/equipe', function () {
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/support', [ContactController::class, 'index'])->name('support');
 
 Route::get('/conditions-utilisation', function () {
     return view('frontend.terms');
