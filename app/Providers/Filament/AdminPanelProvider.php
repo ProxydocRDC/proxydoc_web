@@ -28,6 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->databaseNotifications()
             ->brandLogo(fn () => asset('assets/images/log.webp'))
             ->brandLogoHeight('2rem')
             ->favicon(fn () => asset('assets/images/LOGO-P-1.png'))

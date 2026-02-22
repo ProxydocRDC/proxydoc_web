@@ -43,6 +43,7 @@ class TrackingService
 
     /**
      * Récupère le pays depuis l'IP (cache 24h par IP).
+     * Utilise ip-api.com (HTTP, gratuit, 45 req/min).
      */
     public static function getCountryFromIp(?string $ip): ?string
     {
@@ -52,15 +53,18 @@ class TrackingService
         $cacheKey = 'geo_ip_' . md5($ip);
         return Cache::remember($cacheKey, now()->addDay(), function () use ($ip) {
             try {
-                $response = Http::timeout(2)->get("https://ip-api.com/json/{$ip}", [
-                    'fields' => 'country',
+                // ip-api.com gratuit : HTTP uniquement, pas HTTPS
+                $response = Http::timeout(3)->get("http://ip-api.com/json/{$ip}", [
+                    'fields' => 'status,message,country',
                 ]);
                 if ($response->successful()) {
                     $data = $response->json();
-                    return $data['country'] ?? null;
+                    if (($data['status'] ?? '') === 'success') {
+                        return $data['country'] ?? null;
+                    }
                 }
             } catch (\Throwable $e) {
-                // ignore
+                report($e);
             }
             return null;
         });

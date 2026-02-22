@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Mail\ContactReceivedMail;
 use App\Models\Contact;
+use App\Models\User;
+use Filament\Notifications\Notification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -46,9 +48,19 @@ class ContactController extends Controller
 
         $contact = Contact::create($validator->validated());
 
-        $to = config('contact.notification_email', 'contact@proxydoc.org');
+        $emails = collect([config('contact.notification_email', 'contact@proxydoc.org')])
+            ->merge(config('contact.notification_emails', []))
+            ->merge(User::pluck('email'))
+            ->filter()
+            ->unique()
+            ->values()
+            ->all();
+
         try {
-            Mail::mailer(config('mail.default'))->to($to)->send(new ContactReceivedMail($contact));
+            $mailer = Mail::mailer(config('mail.default'));
+            foreach ($emails as $email) {
+                $mailer->to($email)->send(new ContactReceivedMail($contact));
+            }
         } catch (\Throwable $e) {
             report($e);
             if (config('app.debug')) {
@@ -57,6 +69,19 @@ class ContactController extends Controller
                     'message' => 'Message enregistré mais l’envoi de l’email a échoué : ' . $e->getMessage(),
                 ], 500);
             }
+        }
+
+        try {
+            foreach (User::all() as $user) {
+                Notification::make()
+                    ->title('Nouveau message de contact')
+                    ->body("De {$contact->name} ({$contact->email}) : " . \Illuminate\Support\Str::limit($contact->message, 80))
+                    ->success()
+                    ->icon('heroicon-o-envelope')
+                    ->sendToDatabase($user);
+            }
+        } catch (\Throwable $e) {
+            report($e);
         }
 
         return response()->json([
