@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Filament\Resources\AppLinks\Pages;
+namespace App\Filament\Pages;
 
-use App\Filament\Resources\AppLinks\AppLinkResource;
 use App\Services\MigrationRunnerService;
+use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
-use Filament\Resources\Pages\Page;
+use Filament\Pages\Page;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\Support\Htmlable;
 
 class ManageMigrations extends Page
 {
-  protected static string $resource = AppLinkResource::class;
-
-  protected static bool $shouldRegisterNavigation = true;
+  protected static string|\UnitEnum|null $navigationGroup = 'Application';
 
   protected static ?string $navigationLabel = 'Migrations';
 
   protected static ?string $title = 'Migrations base de données';
 
+  protected static ?string $slug = 'app-migrations';
+
   protected static ?int $navigationSort = 2;
 
-  protected static string|\BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPath;
+  protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPath;
 
-  protected string $view = 'filament.resources.app-links.pages.manage-migrations';
+  protected string $view = 'filament.pages.manage-migrations';
 
   public string $lastOutput = '';
 

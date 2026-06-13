@@ -1,29 +1,29 @@
 <?php
 
-namespace App\Filament\Resources\AppLinks\Pages;
+namespace App\Filament\Pages;
 
-use App\Filament\Resources\AppLinks\AppLinkResource;
 use App\Services\AppQrCodeService;
+use BackedEnum;
 use Filament\Actions\Action;
-use Filament\Resources\Pages\Page;
+use Filament\Pages\Page;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\Support\Htmlable;
 
 class GenerateAppQrCode extends Page
 {
-  protected static string $resource = AppLinkResource::class;
-
-  protected static bool $shouldRegisterNavigation = true;
+  protected static string|\UnitEnum|null $navigationGroup = 'Application';
 
   protected static ?string $navigationLabel = 'QR Code application';
 
   protected static ?string $title = 'Générer le QR Code';
 
+  protected static ?string $slug = 'app-qr-code';
+
   protected static ?int $navigationSort = 3;
 
-  protected static string|\BackedEnum|null $navigationIcon = Heroicon::OutlinedQrCode;
+  protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedQrCode;
 
-  protected string $view = 'filament.resources.app-links.pages.generate-app-qr-code';
+  protected string $view = 'filament.pages.generate-app-qr-code';
 
   public bool $withLogo = true;
 

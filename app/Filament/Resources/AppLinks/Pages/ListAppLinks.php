@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\AppLinks\Pages;
 
+use App\Filament\Pages\GenerateAppQrCode;
+use App\Filament\Pages\ManageMigrations;
 use App\Filament\Resources\AppLinks\AppLinkResource;
 use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
@@ -18,11 +20,11 @@ class ListAppLinks extends ListRecords
             Action::make('qrCode')
                 ->label('QR Code')
                 ->icon(Heroicon::OutlinedQrCode)
-                ->url(fn (): string => AppLinkResource::getUrl('qr-code')),
+                ->url(fn (): string => GenerateAppQrCode::getUrl()),
             Action::make('migrations')
                 ->label('Migrations')
                 ->icon(Heroicon::OutlinedArrowPath)
-                ->url(fn (): string => AppLinkResource::getUrl('migrations')),
+                ->url(fn (): string => ManageMigrations::getUrl()),
             CreateAction::make(),
         ];
     }
