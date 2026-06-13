@@ -4,7 +4,9 @@ namespace App\Filament\Resources\AppLinks;
 
 use App\Filament\Resources\AppLinks\Pages\CreateAppLink;
 use App\Filament\Resources\AppLinks\Pages\EditAppLink;
+use App\Filament\Resources\AppLinks\Pages\GenerateAppQrCode;
 use App\Filament\Resources\AppLinks\Pages\ListAppLinks;
+use App\Filament\Resources\AppLinks\Pages\ManageMigrations;
 use App\Filament\Resources\AppLinks\Pages\ViewAppLink;
 use App\Filament\Resources\AppLinks\Schemas\AppLinkForm;
 use App\Filament\Resources\AppLinks\Schemas\AppLinkInfolist;
@@ -51,6 +53,18 @@ class AppLinkResource extends Resource
             'create' => CreateAppLink::route('/create'),
             'view' => ViewAppLink::route('/{record}'),
             'edit' => EditAppLink::route('/{record}/edit'),
+            'migrations' => ManageMigrations::route('/migrations'),
+            'qr-code' => GenerateAppQrCode::route('/qr-code'),
         ];
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Liens application';
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Application';
     }
 }

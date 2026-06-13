@@ -30,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
             $appLinks = new AppLink([
                 'app_store_url' => 'https://apps.apple.com/cd/app/proxydoc/id6752807730?l=fr-FR',
                 'play_store_url' => 'https://play.google.com/store/apps/details?id=org.proxydoc.mobileapp',
+                'qr_app_store_url' => AppLink::DEFAULT_QR_APP_STORE_URL,
+                'qr_play_store_url' => AppLink::DEFAULT_QR_PLAY_STORE_URL,
             ]);
         }
         View::share('appLinks', $appLinks);

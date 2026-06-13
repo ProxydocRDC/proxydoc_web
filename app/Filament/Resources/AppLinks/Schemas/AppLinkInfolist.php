@@ -12,8 +12,16 @@ class AppLinkInfolist
         return $schema
             ->components([
                 TextEntry::make('app_store_url')
+                    ->label('URL App Store (site web)')
                     ->placeholder('-'),
                 TextEntry::make('play_store_url')
+                    ->label('URL Play Store (site web)')
+                    ->placeholder('-'),
+                TextEntry::make('qr_app_store_url')
+                    ->label('URL App Store (QR code / campagne)')
+                    ->placeholder('-'),
+                TextEntry::make('qr_play_store_url')
+                    ->label('URL Play Store (QR code / campagne)')
                     ->placeholder('-'),
                 TextEntry::make('created_at')
                     ->dateTime()

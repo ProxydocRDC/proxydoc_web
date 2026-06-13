@@ -16,9 +16,19 @@ class AppLinksTable
         return $table
             ->columns([
                 TextColumn::make('app_store_url')
+                    ->label('App Store (site)')
                     ->searchable(),
                 TextColumn::make('play_store_url')
+                    ->label('Play Store (site)')
                     ->searchable(),
+                TextColumn::make('qr_app_store_url')
+                    ->label('App Store (QR)')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('qr_play_store_url')
+                    ->label('Play Store (QR)')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
