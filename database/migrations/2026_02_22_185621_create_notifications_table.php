@@ -6,26 +6,30 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('notifications', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('type');
-            $table->morphs('notifiable');
-            $table->text('data');
-            $table->timestamp('read_at')->nullable();
-            $table->timestamps();
-        });
+  /**
+   * Crée la table notifications si elle n'existe pas déjà.
+   */
+  public function up(): void
+  {
+    if (Schema::hasTable('notifications')) {
+      return;
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('notifications');
-    }
+    Schema::create('notifications', function (Blueprint $table) {
+      $table->uuid('id')->primary();
+      $table->string('type');
+      $table->morphs('notifiable');
+      $table->text('data');
+      $table->timestamp('read_at')->nullable();
+      $table->timestamps();
+    });
+  }
+
+  /**
+   * Supprime la table notifications.
+   */
+  public function down(): void
+  {
+    Schema::dropIfExists('notifications');
+  }
 };

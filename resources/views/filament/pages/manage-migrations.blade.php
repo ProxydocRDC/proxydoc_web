@@ -3,7 +3,7 @@
         <x-filament::section>
             <x-slot name="heading">État des migrations</x-slot>
             <x-slot name="description">
-                {{ $pendingCount }} migration(s) en attente. Les migrations déjà exécutées sont listées ci-dessous et seront ignorées lors de l'exécution.
+                {{ $pendingCount }} migration(s) en attente. Les structures déjà présentes en base seront ignorées lors de la synchronisation.
             </x-slot>
 
             <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-white/5">

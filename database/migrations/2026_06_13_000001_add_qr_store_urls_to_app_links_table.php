@@ -12,6 +12,13 @@ return new class extends Migration
    */
   public function up(): void
   {
+    if (
+      Schema::hasColumn('app_links', 'qr_app_store_url')
+      && Schema::hasColumn('app_links', 'qr_play_store_url')
+    ) {
+      return;
+    }
+
     Schema::table('app_links', function (Blueprint $table) {
       $table->string('qr_app_store_url')->nullable()->after('play_store_url');
       $table->string('qr_play_store_url')->nullable()->after('qr_app_store_url');

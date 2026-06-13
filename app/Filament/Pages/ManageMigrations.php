@@ -40,7 +40,7 @@ class ManageMigrations extends Page
         ->color('primary')
         ->requiresConfirmation()
         ->modalHeading('Exécuter les migrations')
-        ->modalDescription('Les migrations déjà appliquées seront ignorées automatiquement. Seules les migrations en attente seront exécutées, dans l\'ordre chronologique.')
+        ->modalDescription('Les migrations déjà appliquées ou déjà présentes en base de données seront ignorées automatiquement. Seules les migrations réellement manquantes seront exécutées.')
         ->modalSubmitActionLabel('Exécuter')
         ->action(function (MigrationRunnerService $migrationRunnerService): void {
           $result = $migrationRunnerService->runPending();
